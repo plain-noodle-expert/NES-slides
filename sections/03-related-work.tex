@@ -1,0 +1,15 @@
+\section{Related work and the gap}
+\begin{frame}{Prior work establishes insecurity, poisoning, and human factors}
+\small
+\begin{tabularx}{\textwidth}{@{}p{3cm}Xp{4cm}@{}}
+\toprule
+\textbf{Research strand} & \textbf{Representative studies} & \textbf{What it establishes}\\\midrule
+Generated-code security & Pearce et al., \emph{Asleep at the Keyboard?} (2022); Khoury et al. (2023) & Coding models can produce insecure implementations and defaults.\\[8pt]
+Developer interaction & Perry et al. (CCS 2023); Sandoval et al., \emph{Lost at C} (USENIX Security 2023) & Trust, prompting, and verification affect security outcomes.\\[8pt]
+Adversarial manipulation & Schuster et al., \emph{You Autocomplete Me} (2021); Oh et al., \emph{Poisoned ChatGPT} (2024) & Poisoning can steer coding assistants toward unsafe output.\\\bottomrule
+\end{tabularx}
+\medskip
+\textbf{Gap:} NES implicitly collects context from an ongoing edit stream and proactively proposes a sequence of changes. This study connects those mechanisms to security failures.
+\source{Sections 1 and 7; references [27, 37, 43--46]}
+\note{These are strands of prior work, not claims that all earlier assistants use only local context. Summaries follow the supplied paper's related-work discussion. Selected references are available in the optional backup slides.}
+\end{frame}

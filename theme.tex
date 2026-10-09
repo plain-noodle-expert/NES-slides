@@ -1,0 +1,32 @@
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{booktabs,tabularx,listings,tikz,pgfplots,pgfpages}
+\usetikzlibrary{arrows.meta,positioning}
+\pgfplotsset{compat=1.18}
+\definecolor{Navy}{HTML}{152B43}
+\definecolor{Teal}{HTML}{007F86}
+\definecolor{Coral}{HTML}{CB593E}
+\definecolor{Muted}{HTML}{526476}
+\definecolor{Light}{HTML}{F0F5F7}
+\setbeamercolor{normal text}{fg=Navy,bg=white}
+\setbeamercolor{structure}{fg=Teal}
+\setbeamercolor{frametitle}{fg=Navy,bg=white}
+\setbeamercolor{title}{fg=Navy}
+\setbeamercolor{subtitle}{fg=Teal}
+\setbeamercolor{block title}{fg=white,bg=Teal}
+\setbeamercolor{block body}{fg=Navy,bg=Light}
+\setbeamercolor{alerted text}{fg=Coral}
+\setbeamerfont{title}{size=\LARGE,series=\bfseries}
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamerfont{subtitle}{size=\large}
+\setbeamersize{text margin left=8mm,text margin right=8mm}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\small\raise.15ex\hbox{\textbullet}}
+\setbeamertemplate{itemize subitem}{\textendash}
+\setbeamertemplate{frametitle}{\vspace{3mm}\insertframetitle\par\vspace{1mm}\textcolor{Teal}{\rule{\textwidth}{.7pt}}}
+\setbeamertemplate{footline}{\hspace{8mm}\raisebox{2mm}{\scriptsize\textcolor{Muted}{NES security\quad|\quad\insertsectionhead}}\hfill\raisebox{2mm}{\scriptsize\insertframenumber}\hspace{8mm}}
+\newcommand{\source}[1]{\par\vspace{2mm}{\tiny\color{Muted}Source: supplied paper, #1.}}
+\newcommand{\takeaway}[1]{\begin{block}{Takeaway}#1\end{block}}
+\newcommand{\metric}[2]{{\color{Teal}\LARGE\bfseries #1}\par\smallskip{\small #2}}
+\lstset{basicstyle=\ttfamily\small,backgroundcolor=\color{Light},frame=single,rulecolor=\color{Light},breaklines=true,columns=fullflexible,showstringspaces=false,keywordstyle=\color{Teal}\bfseries,commentstyle=\color{Muted},stringstyle=\color{Coral},aboveskip=5pt,belowskip=5pt}
+\pgfplotsset{nesbars/.style={ybar,bar width=14pt,ymin=0,ymax=110,ytick={0,25,50,75,100},ylabel={Failure rate (\%)},height=4.6cm,width=\textwidth,axis lines*=left,ymajorgrids=true,grid style={gray!15},tick label style={font=\scriptsize},label style={font=\small},nodes near coords,nodes near coords style={font=\tiny},legend style={font=\scriptsize,draw=none,at={(.5,1.12)},anchor=south,legend columns=2},enlarge x limits=.12}}

@@ -1,0 +1,33 @@
+\section{White-box evaluation}
+\begin{frame}{White-box design: control the context, inspect the resulting edit}
+\begin{enumerate}
+\item Scan the top \textbf{1,000 Java-only GitHub projects} with CodeQL for representative insecure patterns.
+\item Build a safe but incomplete target at the cursor; retain surrounding artifacts as potential propagation sources.
+\item Reconstruct NES prompts using \textbf{tree-sitter}, structural context, dependencies, and synthetic edit history.
+\item Query \textbf{Zeta}, apply the suggested edit, and check whether the targeted risk manifests.
+\end{enumerate}
+\medskip
+\textbf{Scale:} 410 base cases across 9 CWE categories; 10 repetitions per case, yielding 4,100 runs.
+\source{Sections 3.1 and 4; Table 2}
+\note{For context propagation, keep a benign target and vary peripheral context. For transactions, initiate an opening edit and inspect the sequence. Contamination comes from artifacts within the same codebase; no external attacker is required. Eleven vectors have ten base cases each; component replacement V9 has 300. Hence 110 + 300 = 410 base cases and 4,100 repeated runs. Table 2 lists 3,000 V9 runs, unlike the other vectors' 100. The ethics appendix contains a conflicting 4,300 count; this deck follows the main evaluation table.}
+\end{frame}
+
+\begin{frame}{Security checking combines structural and semantic evidence}
+\begin{columns}[T]
+\column{.55\textwidth}
+\begin{itemize}
+\item \textbf{AST checks:} vulnerable calls or missing configuration.
+\item \textbf{Regex checks:} secret literals and unsafe lexical patterns.
+\item \textbf{Semantic judges:} sensitivity, data flow, or edit intent that syntax cannot resolve.
+\end{itemize}
+\column{.41\textwidth}
+\begin{block}{LLM adjudication}
+\small Five independent judges.\\[5pt]
+At least \textbf{4 of 5} must flag a suggestion as insecure.\\[5pt]
+\textbf{51 split-vote cases} receive manual review.
+\end{block}
+\end{columns}
+\takeaway{Rates measure failures in deliberately activated security scenarios, rather than ordinary coding prevalence.}
+\source{Section 3.1; Appendices D--E}
+\note{The panel comprises DeepSeek-V3.2, Qwen3-235B-A22B, Gemini-3-Flash, Claude-Haiku-4.5, and GPT-5-mini. A 2--3 vote split is manually resolved. The detectors are useful but not a proof of exploitable behavior in every original repository.}
+\end{frame}

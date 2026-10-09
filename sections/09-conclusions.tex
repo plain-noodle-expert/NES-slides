@@ -1,0 +1,34 @@
+\section{Conclusions}
+\begin{frame}{Security must follow the entire context-to-edit workflow}
+\begin{columns}[T]
+\column{.48\textwidth}
+\textbf{For IDE providers}
+\begin{itemize}
+\item Make context sources and exclusions visible.
+\item Filter suspicious context and suggestions.
+\item Flag security-sensitive changes before acceptance.
+\item Evaluate multi-step edits and incomplete remediation.
+\end{itemize}
+\column{.48\textwidth}
+\textbf{For developers and teams}
+\begin{itemize}
+\item Treat suggested edits as unverified code.
+\item Review the full transaction and skipped sites.
+\item Check secrets, authorization, and migration settings explicitly.
+\item Combine review, security analysis, and secure-coding training.
+\end{itemize}
+\end{columns}
+\source{Section 6; transaction-level review follows the reported failure mechanisms}
+\note{These recommendations are implications and proposed defenses, not defenses experimentally validated by this paper.}
+\end{frame}
+
+\begin{frame}{Three messages to take away}
+\begin{enumerate}
+\item \textbf{NES broadens the security boundary.} Ambient interactions and project context shape proactive edits.
+\item \textbf{Better base models do not resolve every workflow risk.} Context propagation and lost security invariants appear across the tested systems.
+\item \textbf{Review must cover the sequence.} Fluent code, navigation, or silence does not establish secure completion.
+\end{enumerate}
+\bigskip
+\centering\Large\color{Teal}A Tab press accepts an edit;\\it does not establish its security.
+\source{Sections 4--8}
+\end{frame}

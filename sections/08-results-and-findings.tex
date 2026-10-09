@@ -1,0 +1,81 @@
+\section{Results and findings}
+\begin{frame}{Reported headline rates show failures across both settings}
+\begin{columns}[T]
+\column{.46\textwidth}\metric{74.44\%}{White-box: Zeta\\Macro-average across 12 vectors}
+\column{.46\textwidth}\metric{77.92\%}{Black-box: four IDEs\\Average across vectors and IDEs}
+\end{columns}
+\bigskip
+\begin{block}{Read the denominator carefully}
+\small White-box: 4,100 runs, with 3,000 assigned to component replacement.\\
+Black-box: 480 executions, evenly spread across vectors and IDEs.\\[5pt]
+The white-box headline equally weights vectors; it is \textbf{not} the pooled fraction of 4,100 runs.
+\end{block}
+\source{Section 4; Table 2}
+\note{Averaging the twelve reported Zeta percentages gives 74.449\%, consistent with the paper's 74.44\% headline up to rounding or truncation. Weighting the displayed rates by Table 2 run counts instead gives approximately 54.60\%. V9's 46.39\% is itself not an exact integer fraction of 3,000, so avoid claiming an exact pooled vulnerable count.}
+\end{frame}
+
+\begin{frame}{C1 results: expanded context carries unsafe patterns}
+\begin{tikzpicture}
+\begin{axis}[nesbars,symbolic x coords={V1,V2,V3,V4,V5,V6},xtick=data]
+\addplot[fill=Teal,draw=Teal] coordinates {(V1,90)(V2,70)(V3,33)(V4,100)(V5,80)(V6,100)};
+\addplot[fill=Coral,draw=Coral] coordinates {(V1,57.5)(V2,77.5)(V3,55)(V4,90)(V5,100)(V6,100)};
+\legend{Zeta,Commercial IDE average}
+\end{axis}
+\end{tikzpicture}
+\scriptsize V1 model; V2 viewed code; V3 history; V4 undo; V5 structure; V6 dependencies.\par\smallskip\small\textbf{Finding:} undo may remove a secret from the file while leaving it in model context.
+\source{Table 2; Sections 4.1.1 and 4.2}
+\note{Commercial systems show lower V1 failure rates, but higher failures on V2, V3 and V5. V4 and V6 remain high. These are conditional failure rates for distinct vector-specific scenarios, not controlled comparisons of interchangeable context sources.}
+\end{frame}
+
+\begin{frame}{C2 results: functional refactoring loses security invariants}
+\begin{tikzpicture}
+\begin{axis}[nesbars,symbolic x coords={Logging,Visibility,Replacement},xtick=data]
+\addplot[fill=Teal,draw=Teal] coordinates {(Logging,82)(Visibility,90)(Replacement,46.39)};
+\addplot[fill=Coral,draw=Coral] coordinates {(Logging,87.5)(Visibility,85)(Replacement,62.5)};
+\legend{Zeta,Commercial IDE average}
+\end{axis}
+\end{tikzpicture}
+\scriptsize V7: sensitive logging; V8: endpoint exposure; V9: missing XML-parser protections.\par\smallskip\small\textbf{Finding:} functionally equivalent replacements can lose security settings.
+\source{Table 2; Sections 4.1.2 and 4.2}
+\note{Component replacement has much broader white-box coverage than the other two vectors. Commercial V9 is 16.11 percentage points higher than Zeta in the selected black-box cases; the scenario distributions are not identical.}
+\end{frame}
+
+\begin{frame}{C3 results: jumps, silence, and insecure later steps}
+\begin{tikzpicture}
+\begin{axis}[nesbars,symbolic x coords={Jumping,No-Op,Sequential},xtick=data]
+\addplot[fill=Teal,draw=Teal] coordinates {(Jumping,90)(No-Op,43)(Sequential,69)};
+\addplot[fill=Coral,draw=Coral] coordinates {(Jumping,52.5)(No-Op,82.5)(Sequential,85)};
+\legend{Zeta,Commercial IDE average}
+\end{axis}
+\end{tikzpicture}
+\scriptsize These are simulated workflow failures, not measured human acceptance probabilities.
+\source{Table 2; Sections 3.1.3 and 4.1.3--4.2}
+\note{The paper sometimes calls V12 an acceptance rate; the described technical protocol simulates developer behavior rather than observing participant acceptance. Label it as a sequence-related failure rate. The authors attribute some cross-IDE differences to debouncing, but the comparison does not causally isolate this mechanism.}
+\end{frame}
+
+\begin{frame}{Survey findings: exposure exceeds explicit security checking}
+\begin{columns}[T]
+\column{.31\textwidth}\metric{81.1\%}{Report encountering insecure NES suggestions}
+\column{.31\textwidth}\metric{62.4\%}{Report test-to-production data suggestions}
+\column{.31\textwidth}\metric{12.3\%}{Explicitly check suggestion security}
+\end{columns}
+\bigskip
+\begin{itemize}
+\item 28.6\% report always thoroughly reviewing NES output.
+\item 32.0\% report skimming or rarely reviewing it.
+\item 55.0\% select clean-looking code as a reason for acceptance.
+\end{itemize}
+\source{Sections 5.4--5.5; Figures 5--6; retained $N=269$}
+\note{Acceptance reasons are multi-select. Review frequency and post-suggestion checking come from different questions. These self-reports establish a verification gap in this cohort, not objective vulnerability detection accuracy or a causal effect of NES on vigilance.}
+\end{frame}
+
+\begin{frame}{What limits the interpretation of these findings?}
+\begin{itemize}
+\item \textbf{Technical scope:} Java, one open NES model, and four commercial IDEs at study time.
+\item \textbf{Sampling:} scenarios intentionally activate risks; black-box testing uses ten cases per vector per IDE.
+\item \textbf{Measurement:} reconstructed prompts and hybrid detectors approximate production behavior; proprietary internals remain hidden.
+\item \textbf{Human evidence:} self-reports from one company and one university; no causal acceptance experiment or population-wide estimate.
+\end{itemize}
+\takeaway{The study demonstrates mechanism-linked failures; everyday prevalence and mitigation effectiveness remain open questions.}
+\source{Sections 3, 5, and 6}
+\end{frame}

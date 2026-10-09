@@ -1,0 +1,11 @@
+\section{Problem statement and motivation}
+\begin{frame}{Productive editing can silently expand security exposure}
+\begin{enumerate}
+\item \textbf{Implicit retrieval:} secrets or unsafe patterns enter the model's context through viewed code, history, or dependencies.
+\item \textbf{Semantic changes:} a refactor can preserve functionality while losing authorization, confidentiality, or parser protections.
+\item \textbf{Low-friction acceptance:} multi-location suggestions make complete security review harder during a Tab-by-Tab flow.
+\end{enumerate}
+\takeaway{Assessing the generated snippet alone misses risks created by the IDE workflow.}
+\source{Sections 1--2}
+\note{The introduction describes a reported secret-key incident involving recently viewed context and indexing exclusions. The deck focuses on the mechanism rather than asserting present-day product behavior.}
+\end{frame}

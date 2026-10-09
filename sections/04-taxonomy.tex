@@ -1,0 +1,32 @@
+\section{Taxonomy}
+\begin{frame}{Taxonomy: C1, context contamination (V1--V6)}
+\small
+\begin{tabularx}{\textwidth}{@{}p{.7cm}p{3.7cm}X@{}}
+\toprule
+ & \textbf{Risk vector} & \textbf{Failure manifestation}\\\midrule
+V1 & Pre-trained model & Suggest weak cryptographic primitives without a contaminated input.\\[5pt]
+V2 & Recently viewed code & Reproduce a secret from a viewed configuration file.\\[5pt]
+V3 & Edit history & Copy unsafe SQL concatenation from recent edits.\\[5pt]
+V4 & Undo operation & Reintroduce a credential the developer removed.\\[5pt]
+V5 & Structural context & Use an unsafe API without preserving local security constraints.\\[5pt]
+V6 & Cross-file dependencies & Carry insecure testing patterns into production code.\\\bottomrule
+\end{tabularx}
+\source{Table 1; Section 3.1.1}
+\note{V1 serves as the model-inherited baseline within the paper's C1 grouping. File outline and diagnostics are context inputs but are not treated as independent vectors in this taxonomy. V6's evaluation narrative uses test-to-production path handling; the appendix detection table describes a credential variant.}
+\end{frame}
+
+\begin{frame}{Taxonomy: transactional edits and human--IDE interaction}
+\small
+\begin{tabularx}{\textwidth}{@{}p{.7cm}p{3.9cm}X@{}}
+\toprule
+ & \textbf{Risk vector} & \textbf{Failure manifestation}\\\midrule
+V7 & Variable logging & Copy a logging pattern onto sensitive variables.\\[5pt]
+V8 & Visibility refactoring & Expose internal sensitive methods as endpoints.\\[5pt]
+V9 & Component replacement & Omit parser-specific XXE protections after migration.\\\midrule
+V10 & Location jumping & Skip intermediate vulnerable sites during remediation.\\[5pt]
+V11 & No-Op edit & Stop suggesting before the entire fix is complete.\\[5pt]
+V12 & Sequential edits & Introduce an insecure suggestion after a correct streak.\\\bottomrule
+\end{tabularx}
+\source{Table 1; Sections 3.1.2--3.1.3}
+\note{C3 technical tests simulate an editing flow. They identify risky suggestions and incomplete remediation; they do not directly measure a human's acceptance probability. The subsequent survey provides complementary self-reported evidence.}
+\end{frame}

@@ -1,0 +1,46 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\input{theme.tex}
+\title[Tab, Tab, Bug]{``Tab, Tab, Bug''}
+\subtitle{Security Pitfalls of Next Edit Suggestions\\in AI-Integrated IDEs}
+\author[Lyu et al.]{Yunlong Lyu \and Yixuan Tang \and Peng Chen \and Tian Dong\\Xinyu Wang \and Zhiqiang Dong \and Hao Chen}
+\institute{The University of Hong Kong \quad McGill University \quad Independent Researchers}
+\date{NES security study}
+% Set \shownotestrue to generate a separate speaker-notes PDF.
+\newif\ifshownotes
+\shownotesfalse
+\ifshownotes\setbeameroption{show notes}\else\setbeameroption{hide notes}\fi
+\begin{document}
+\begin{frame}[plain]
+\titlepage
+\note{This presentation summarizes the supplied 18-page paper. Publication metadata in that PDF contains placeholders, so no venue or publication year is asserted here.}
+\end{frame}
+\begin{frame}{The talk at a glance}
+\begin{columns}[T]
+\column{.49\textwidth}
+\textbf{Understand the mechanism}\par\medskip
+1. What is NES?\\[5pt]
+2. Problem statement and motivation\\[5pt]
+3. Related work and the gap\\[5pt]
+4. Taxonomy
+\column{.49\textwidth}
+\textbf{Evaluate the security consequences}\par\medskip
+5. White-box evaluation\\[5pt]
+6. Black-box evaluation\\[5pt]
+7. User study\\[5pt]
+8. Results and findings\\[5pt]
+9. Conclusions
+\end{columns}
+\end{frame}
+\input{sections/01-what-is-nes.tex}
+\input{sections/02-problem-and-motivation.tex}
+\input{sections/03-related-work.tex}
+\input{sections/04-taxonomy.tex}
+\input{sections/05-white-box.tex}
+\input{sections/06-black-box.tex}
+\input{sections/07-user-study.tex}
+\input{sections/08-results-and-findings.tex}
+\input{sections/09-conclusions.tex}
+% Optional detailed results and references (adds two pages):
+% \appendix
+% \input{sections/10-backup.tex}
+\end{document}

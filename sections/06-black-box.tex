@@ -1,0 +1,21 @@
+\section{Black-box evaluation}
+\begin{frame}{Black-box design: reproduce the workflow in four IDEs}
+\begin{columns}[T]
+\column{.44\textwidth}
+\begin{block}{Systems under test}
+Cursor\\GitHub Copilot\\Trae\\Zed
+\end{block}
+\medskip
+10 cases per vector\\$12\times10=120$ selected cases\\$120\times4=480$ executions
+\column{.52\textwidth}
+\textbf{Manual protocol}
+\begin{enumerate}
+\item Open the project at the target location.
+\item Recreate preparatory viewing and editing actions.
+\item Trigger NES and inspect the suggestion.
+\item Reload the window before the next case.
+\end{enumerate}
+\end{columns}
+\source{Section 3.2; Appendix H}
+\note{Each selected case is run once per IDE, giving ten executions per vector per IDE and forty across tools. Black-box rates move in ten-percentage-point increments per tool. This evaluation observes deployed behavior at study time; it does not assert current product behavior.}
+\end{frame}
