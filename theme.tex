@@ -1,32 +1,62 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{booktabs,tabularx,listings,tikz,pgfplots,pgfpages}
+\usepackage{colortbl,tcolorbox}
 \usetikzlibrary{arrows.meta,positioning}
 \pgfplotsset{compat=1.18}
-\definecolor{Navy}{HTML}{152B43}
-\definecolor{Teal}{HTML}{007F86}
+% Copenhagen styling adapted from the user-supplied template.
+\usetheme{Copenhagen}
+\definecolor{tencent}{RGB}{0,82,217}
+\definecolor{Navy}{RGB}{25,25,25}
+\definecolor{Teal}{RGB}{0,82,217}
 \definecolor{Coral}{HTML}{CB593E}
 \definecolor{Muted}{HTML}{526476}
-\definecolor{Light}{HTML}{F0F5F7}
+\definecolor{Light}{HTML}{F0F4FC}
+\definecolor{BoxTitle}{HTML}{C9DDF8}
+\definecolor{BoxTitleText}{HTML}{163E72}
+\usefonttheme{serif}
 \setbeamercolor{normal text}{fg=Navy,bg=white}
-\setbeamercolor{structure}{fg=Teal}
-\setbeamercolor{frametitle}{fg=Navy,bg=white}
-\setbeamercolor{title}{fg=Navy}
-\setbeamercolor{subtitle}{fg=Teal}
-\setbeamercolor{block title}{fg=white,bg=Teal}
-\setbeamercolor{block body}{fg=Navy,bg=Light}
+\setbeamercolor{section in toc}{fg=tencent}
+\setbeamercolor{subsection in toc}{fg=tencent}
+\setbeamercolor{item}{fg=tencent}
+\setbeamercolor{subitem}{fg=tencent}
+\setbeamercolor{structure}{fg=tencent}
 \setbeamercolor{alerted text}{fg=Coral}
-\setbeamerfont{title}{size=\LARGE,series=\bfseries}
-\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamercolor{block title}{fg=BoxTitleText,bg=BoxTitle}
+\setbeamercolor{block body}{fg=Navy,bg=Light}
+% Consistent pale title bands with visible borders for all content blocks.
+\setbeamertemplate{block begin}{%
+  \begin{tcolorbox}[colback=Light,colbacktitle=BoxTitle,
+    coltitle=BoxTitleText,coltext=Navy,colframe=tencent!55,
+    title={\insertblocktitle},fonttitle=\normalsize\bfseries,
+    boxrule=.6pt,arc=2pt,left=2mm,right=2mm,top=1mm,bottom=1mm,
+    toptitle=1mm,bottomtitle=1mm,before skip=5pt,after skip=5pt]}
+\setbeamertemplate{block end}{\end{tcolorbox}}
+\setbeamerfont{frametitle}{size=\large}
+\setbeamerfont{title}{size=\LARGE}
 \setbeamerfont{subtitle}{size=\large}
-\setbeamersize{text margin left=8mm,text margin right=8mm}
+\setbeamersize{text margin left=7mm,text margin right=7mm}
 \setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{itemize item}{\small\raise.15ex\hbox{\textbullet}}
-\setbeamertemplate{itemize subitem}{\textendash}
-\setbeamertemplate{frametitle}{\vspace{3mm}\insertframetitle\par\vspace{1mm}\textcolor{Teal}{\rule{\textwidth}{.7pt}}}
-\setbeamertemplate{footline}{\hspace{8mm}\raisebox{2mm}{\scriptsize\textcolor{Muted}{NES security\quad|\quad\insertsectionhead}}\hfill\raisebox{2mm}{\scriptsize\insertframenumber}\hspace{8mm}}
-\newcommand{\source}[1]{\par\vspace{2mm}{\tiny\color{Muted}Source: supplied paper, #1.}}
+% No navigation strip above the blue frame title.
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{%
+    \begin{beamercolorbox}[wd=.86\paperwidth,ht=3ex,dp=1.2ex,leftskip=3mm]{author in head/foot}%
+      \fontsize{6.5}{8}\selectfont\insertshortauthor
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.14\paperwidth,ht=3ex,dp=1.2ex,center]{date in head/foot}%
+      \usebeamerfont{date in head/foot}\insertframenumber\,/\,\inserttotalframenumber
+    \end{beamercolorbox}}}
+% Fixed source baseline, just above the author footer on every cited slide.
+\newcommand{\source}[1]{%
+  \tikz[remember picture,overlay]{%
+    \node[anchor=south west,inner sep=0pt,text=Muted,
+          font=\fontsize{5}{6}\selectfont,align=left,
+          text width=\dimexpr\paperwidth-14mm\relax]
+      at ([xshift=7mm,yshift=5mm]current page.south west)
+      {Source: supplied paper, #1.};}}
+
 \newcommand{\takeaway}[1]{\begin{block}{Takeaway}#1\end{block}}
 \newcommand{\metric}[2]{{\color{Teal}\LARGE\bfseries #1}\par\smallskip{\small #2}}
 \lstset{basicstyle=\ttfamily\small,backgroundcolor=\color{Light},frame=single,rulecolor=\color{Light},breaklines=true,columns=fullflexible,showstringspaces=false,keywordstyle=\color{Teal}\bfseries,commentstyle=\color{Muted},stringstyle=\color{Coral},aboveskip=5pt,belowskip=5pt}
-\pgfplotsset{nesbars/.style={ybar,bar width=14pt,ymin=0,ymax=110,ytick={0,25,50,75,100},ylabel={Failure rate (\%)},height=4.6cm,width=\textwidth,axis lines*=left,ymajorgrids=true,grid style={gray!15},tick label style={font=\scriptsize},label style={font=\small},nodes near coords,nodes near coords style={font=\tiny},legend style={font=\scriptsize,draw=none,at={(.5,1.12)},anchor=south,legend columns=2},enlarge x limits=.12}}
+\pgfplotsset{nesbars/.style={ybar,bar width=14pt,ymin=0,ymax=110,ytick={0,25,50,75,100},ylabel={Failure rate (\%)},height=4.2cm,width=\textwidth,axis lines*=left,ymajorgrids=true,grid style={gray!15},tick label style={font=\scriptsize},label style={font=\small},nodes near coords,nodes near coords style={font=\tiny},legend style={font=\scriptsize,draw=none,at={(.5,1.12)},anchor=south,legend columns=2},enlarge x limits=.12}}

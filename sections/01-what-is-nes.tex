@@ -1,17 +1,21 @@
 \section{What is NES?}
 \begin{frame}{NES predicts the next edit, including where it belongs}
+% Pale-blue title highlight shared with the other content boxes.
 \begin{block}{Next Edit Suggestions (NES)}
-An IDE continuously uses recent interactions and project context to infer the developer's intent and proactively suggest the next code modification.
+An AI-integrated IDE continuously uses recent interactions and project context to infer the developer's intent and proactively suggest the next code modification.
 \end{block}
-\medskip
-\small
-\begin{tabularx}{\textwidth}{@{}p{3.1cm}XX@{}}
+\par\vspace{3mm}
+{\footnotesize
+\setlength{\tabcolsep}{7pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
 \toprule
- & \textbf{Conventional completion} & \textbf{NES}\\\midrule
-Primary signal & Local code near the cursor & Edit stream plus broader project context\\[5pt]
-Suggested change & Continuation at the cursor & Insertions, deletions, replacements; potentially other locations or files\\[5pt]
-Interaction & Complete the current line & Review, navigate, accept; repeat with Tab\\\bottomrule
-\end{tabularx}
+\rowcolor{BoxTitle}
+ & \textcolor{BoxTitleText}{\textbf{Conventional completion}} & \textcolor{BoxTitleText}{\textbf{NES}}\\\midrule
+\textbf{Primary signal} & Local code near the cursor & Recent edits and broader project context\\[7pt]
+\textbf{Suggested change} & Continue code at the cursor & Insert, delete, or replace code across lines or files\\[7pt]
+\textbf{Interaction} & Complete the current line & Review, navigate, accept; repeat with Tab\\\bottomrule
+\end{tabularx}}\par
 \source{Sections 1--2}
 \note{Use the paper's distinction as a conceptual comparison. Implementations vary; modern completion tools may also retrieve repository context. NES is distinguished here by proactive next-edit prediction and the repeated per-edit acceptance loop.}
 \end{frame}
@@ -19,7 +23,7 @@ Interaction & Complete the current line & Review, navigate, accept; repeat with 
 \begin{frame}{Inside the context-to-edit pipeline}
 \centering
 \begin{tikzpicture}[
- stage/.style={draw=Teal,fill=Light,rounded corners=2pt,text width=2.05cm,minimum height=1.5cm,align=center,font=\small},
+ stage/.style={draw=Teal,fill=Light,rounded corners=2pt,text width=2.05cm,minimum height=2.1cm,align=center,font=\small},
  flow/.style={-{Latex[length=2mm]},thick,Teal}]
 \node[stage] (actions) at (0,0) {\textbf{User actions}\\[3pt]Edit, view, move, undo};
 \node[stage] (context) at (2.75,0) {\textbf{Context}\\[3pt]History, code, LSP data};
@@ -30,9 +34,10 @@ Interaction & Complete the current line & Review, navigate, accept; repeat with 
 \draw[flow] (context) -- (model);
 \draw[flow] (model) -- (diff);
 \draw[flow] (diff) -- (accept);
-\draw[flow] (accept.south) -- ++(0,-.8) -| (actions.south);
-\node[fill=white,text=Teal,font=\small] at (5.5,-1.6) {Accepted edits update the codebase and edit history};
+\draw[flow] (accept.south) -- (11,-1.65) -- (0,-1.65) -- (actions.south);
+\node[text=Teal,font=\small,align=center] at (5.5,-2.1) {Accepted edits update the codebase and edit history};
 \end{tikzpicture}
+\par\vspace{4mm}
 \takeaway{The security boundary spans \textbf{triggers, retrieved context, predicted edits, and acceptance}.}
 \source{Section 2, Figure 1; simplified architectural redraw}
 \note{Walk from the developer's action to event monitoring, context assembly, model prediction, response parsing and Tab acceptance. Acceptance itself becomes another edit in the history, closing the feedback loop.}

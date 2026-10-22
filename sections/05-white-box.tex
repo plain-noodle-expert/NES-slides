@@ -21,13 +21,14 @@
 \item \textbf{Semantic judges:} sensitivity, data flow, or edit intent that syntax cannot resolve.
 \end{itemize}
 \column{.41\textwidth}
+\vspace{-5mm}
 \begin{block}{LLM adjudication}
 \small Five independent judges.\\[5pt]
 At least \textbf{4 of 5} must flag a suggestion as insecure.\\[5pt]
 \textbf{51 split-vote cases} receive manual review.
 \end{block}
 \end{columns}
-\takeaway{Rates measure failures in deliberately activated security scenarios, rather than ordinary coding prevalence.}
+\takeaway{These tests show when NES makes unsafe edits, not how often this happens in everyday coding.}
 \source{Section 3.1; Appendices D--E}
 \note{The panel comprises DeepSeek-V3.2, Qwen3-235B-A22B, Gemini-3-Flash, Claude-Haiku-4.5, and GPT-5-mini. A 2--3 vote split is manually resolved. The detectors are useful but not a proof of exploitable behavior in every original repository.}
 \end{frame}

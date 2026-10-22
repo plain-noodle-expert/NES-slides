@@ -5,11 +5,10 @@
 \column{.46\textwidth}\metric{77.92\%}{Black-box: four IDEs\\Average across vectors and IDEs}
 \end{columns}
 \bigskip
-\begin{block}{Read the denominator carefully}
-\small White-box: 4,100 runs, with 3,000 assigned to component replacement.\\
-Black-box: 480 executions, evenly spread across vectors and IDEs.\\[5pt]
-The white-box headline equally weights vectors; it is \textbf{not} the pooled fraction of 4,100 runs.
-\end{block}
+\takeaway{Both Zeta and commercial IDEs frequently produce unsafe edits in the tested security scenarios.}
+\smallskip
+{\small These are averages across risk vectors. White-box: 4,100 runs; black-box: 480 executions.}
+
 \source{Section 4; Table 2}
 \note{Averaging the twelve reported Zeta percentages gives 74.449\%, consistent with the paper's 74.44\% headline up to rounding or truncation. Weighting the displayed rates by Table 2 run counts instead gives approximately 54.60\%. V9's 46.39\% is itself not an exact integer fraction of 3,000, so avoid claiming an exact pooled vulnerable count.}
 \end{frame}
@@ -29,9 +28,9 @@ The white-box headline equally weights vectors; it is \textbf{not} the pooled fr
 
 \begin{frame}{C2 results: functional refactoring loses security invariants}
 \begin{tikzpicture}
-\begin{axis}[nesbars,symbolic x coords={Logging,Visibility,Replacement},xtick=data]
-\addplot[fill=Teal,draw=Teal] coordinates {(Logging,82)(Visibility,90)(Replacement,46.39)};
-\addplot[fill=Coral,draw=Coral] coordinates {(Logging,87.5)(Visibility,85)(Replacement,62.5)};
+\begin{axis}[nesbars,symbolic x coords={V7,V8,V9},xtick=data]
+\addplot[fill=Teal,draw=Teal] coordinates {(V7,82)(V8,90)(V9,46.39)};
+\addplot[fill=Coral,draw=Coral] coordinates {(V7,87.5)(V8,85)(V9,62.5)};
 \legend{Zeta,Commercial IDE average}
 \end{axis}
 \end{tikzpicture}
@@ -42,13 +41,13 @@ The white-box headline equally weights vectors; it is \textbf{not} the pooled fr
 
 \begin{frame}{C3 results: jumps, silence, and insecure later steps}
 \begin{tikzpicture}
-\begin{axis}[nesbars,symbolic x coords={Jumping,No-Op,Sequential},xtick=data]
-\addplot[fill=Teal,draw=Teal] coordinates {(Jumping,90)(No-Op,43)(Sequential,69)};
-\addplot[fill=Coral,draw=Coral] coordinates {(Jumping,52.5)(No-Op,82.5)(Sequential,85)};
+\begin{axis}[nesbars,symbolic x coords={V10,V11,V12},xtick=data]
+\addplot[fill=Teal,draw=Teal] coordinates {(V10,90)(V11,43)(V12,69)};
+\addplot[fill=Coral,draw=Coral] coordinates {(V10,52.5)(V11,82.5)(V12,85)};
 \legend{Zeta,Commercial IDE average}
 \end{axis}
 \end{tikzpicture}
-\scriptsize These are simulated workflow failures, not measured human acceptance probabilities.
+\scriptsize V10: location jumping; V11: No-Op edit; V12: sequential edits.\par\smallskip These are simulated workflow failures, not measured human acceptance probabilities.
 \source{Table 2; Sections 3.1.3 and 4.1.3--4.2}
 \note{The paper sometimes calls V12 an acceptance rate; the described technical protocol simulates developer behavior rather than observing participant acceptance. Label it as a sequence-related failure rate. The authors attribute some cross-IDE differences to debouncing, but the comparison does not causally isolate this mechanism.}
 \end{frame}
@@ -60,6 +59,7 @@ The white-box headline equally weights vectors; it is \textbf{not} the pooled fr
 \column{.31\textwidth}\metric{12.3\%}{Explicitly check suggestion security}
 \end{columns}
 \bigskip
+\vspace{7mm}
 \begin{itemize}
 \item 28.6\% report always thoroughly reviewing NES output.
 \item 32.0\% report skimming or rarely reviewing it.
